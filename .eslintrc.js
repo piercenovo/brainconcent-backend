@@ -12,5 +12,6 @@ module.exports = {
     ecmaVersion: 'latest'
   },
   rules: {
+    'prefer-promise-reject-errors': 'off'
   }
 }
