@@ -17,6 +17,9 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(cors())
 
+// Api Login
+app.use('/api/login', require('./routes/auth'))
+
 const port = process.env.PORT || 6000
 // Servidor Corriendo
 app.listen(port, () => console.log(`Server running on port ${port}`))
