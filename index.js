@@ -2,6 +2,9 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 
+const authRouter = require('./routes/auth.routes')
+const userRouter = require('./routes/user.routes')
+
 // Env Config
 require('dotenv').config()
 
@@ -17,8 +20,9 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(cors())
 
-// Api Login
-app.use('/api/login', require('./routes/auth'))
+// Routes
+app.use('/api/auth', authRouter)
+app.use('/api/users', userRouter)
 
 const port = process.env.PORT || 6000
 // Servidor Corriendo
