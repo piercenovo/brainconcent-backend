@@ -4,14 +4,14 @@ const { generateJWT } = require('../helpers/jwt')
 const User = require('../models/user')
 
 const loginUser = async (req = request, res = response) => {
-  const { email, password } = req.body
+  const { username, password } = req.body
 
   try {
-    const userDB = await User.findOne({ email })
+    const userDB = await User.findOne({ username })
     if (!userDB) {
       return res.status(404).json({
-        ok: false,
-        msg: 'Email no encontrado'
+        resp: false,
+        message: 'Nombre de usuario no encontrado'
       })
     }
 
@@ -19,8 +19,8 @@ const loginUser = async (req = request, res = response) => {
     const validPassword = bcrypt.compareSync(password, userDB.password)
     if (!validPassword) {
       return res.status(400).json({
-        ok: false,
-        msg: 'La contraseña no es válida'
+        resp: false,
+        message: 'La contraseña no es válida'
       })
     }
 
@@ -28,15 +28,15 @@ const loginUser = async (req = request, res = response) => {
     const token = await generateJWT(userDB.id)
 
     res.json({
-      ok: true,
+      resp: true,
       user: userDB,
       token
     })
   } catch (error) {
     console.log(error)
     return res.status(500).json({
-      ok: false,
-      msg: 'Hable con el administrador'
+      resp: false,
+      message: 'Hable con el administrador'
     })
   }
 }
@@ -50,7 +50,7 @@ const renewToken = async (req, res = response) => {
   const user = await User.findById(uid)
 
   res.json({
-    ok: true,
+    resp: true,
     user,
     token
   })

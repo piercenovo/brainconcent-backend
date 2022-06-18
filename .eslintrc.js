@@ -9,7 +9,7 @@ module.exports = {
     'standard'
   ],
   parserOptions: {
-    ecmaVersion: 'latest'
+    ecmaVersion: 2020
   },
   rules: {
     'prefer-promise-reject-errors': 'off'
