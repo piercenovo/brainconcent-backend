@@ -5,25 +5,21 @@ const cors = require('cors')
 const authRouter = require('./routes/auth.routes')
 const userRouter = require('./routes/user.routes')
 
-// Env Config
+// Env and DB Config
 require('dotenv').config()
-
-// DB Config
 require('./database/db').dbConnection()
 
 // App de Express
 const app = express()
 
-app.use(morgan('dev'))
-
-// Lectura y parseo del Body
+// Middlewares
+app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+app.use(morgan('dev'))
 app.use(cors())
 
 // Routes
 app.use('/api/auth', authRouter)
-app.use('/api/users', userRouter)
+app.use('/api/user', userRouter)
 
-const port = process.env.PORT || 6000
-// Servidor Corriendo
-app.listen(port, () => console.log(`Server running on port ${port}`))
+module.exports = app

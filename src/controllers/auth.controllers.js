@@ -1,9 +1,9 @@
 const bcrypt = require('bcryptjs/dist/bcrypt')
+const User = require('../models/user.model')
 const { request, response } = require('express')
 const { generateJWT } = require('../helpers/jwt')
-const User = require('../models/user')
 
-const loginUser = async (req = request, res = response) => {
+const login = async (req = request, res = response) => {
   const { username, password } = req.body
 
   try {
@@ -41,7 +41,7 @@ const loginUser = async (req = request, res = response) => {
   }
 }
 
-const renewToken = async (req, res = response) => {
+const renewToken = async (req = request, res = response) => {
   // const uid uid del usuario
   const uid = req.uid
   // generar un nuevo JWT, generarJWT... uid...
@@ -57,6 +57,6 @@ const renewToken = async (req, res = response) => {
 }
 
 module.exports = {
-  loginUser,
+  login,
   renewToken
 }

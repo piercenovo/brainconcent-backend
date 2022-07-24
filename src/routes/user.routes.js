@@ -1,10 +1,10 @@
 /*
- path: /api/users
+ path: /api/user
 */
 
 const { Router } = require('express')
 const { check } = require('express-validator')
-const { createUser } = require('../controllers/user.controller')
+const { createUser } = require('../controllers/user.controllers')
 const { validateFields } = require('../middlewares/validate-fields')
 
 const router = Router()

@@ -1,10 +1,11 @@
 {
   "name": "brainconcent-backend",
   "version": "0.0.1",
-  "description": "",
+  "description": "El backend de la aplicación Brainconcent",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "commit": "cz",
     "release": "standard-version"
   },
