@@ -1,4 +1,4 @@
-const app = require('./app')
+const app = require('./src/app')
 
 // Leer localhost de variables y puerto
 const host = process.env.HOST || '0.0.0.0'
