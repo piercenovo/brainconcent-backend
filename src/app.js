@@ -18,6 +18,8 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors())
 
+app.get('/', (req, res) => res.send('Bienvenido al Backend de Brainconcent'))
+
 // Routes
 app.use('/api/auth', authRouter)
 app.use('/api/user', userRouter)
