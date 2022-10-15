@@ -1,3 +1,4 @@
+
 const bcrypt = require('bcryptjs/dist/bcrypt')
 const { response } = require('express')
 const { generateJWT } = require('../helpers/jwt')
@@ -65,7 +66,27 @@ const getUsers = async (req = require, res = response) => {
   }
 }
 
+const getUser = async (req = require, res = response) => {
+  const { id } = req.params
+
+  try {
+    const user = await User.findById(id)
+
+    res.json({
+      resp: true,
+      user
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      resp: false,
+      message: 'Hable con el administrador'
+    })
+  }
+}
+
 module.exports = {
   createUser,
-  getUsers
+  getUsers,
+  getUser
 }
