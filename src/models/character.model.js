@@ -14,7 +14,7 @@ const UserSchema = Schema({
     type: String,
     required: true
   },
-  color: {
+  colour: {
     type: String,
     required: true
   },
