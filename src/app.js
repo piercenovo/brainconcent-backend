@@ -6,6 +6,7 @@ const cors = require('cors')
 const authRouter = require('./routes/auth.routes')
 const userRouter = require('./routes/user.routes')
 const gameRouter = require('./routes/game.routes')
+const characterRouter = require('./routes/character.routes')
 
 // Env and DB Config
 require('dotenv').config()
@@ -30,6 +31,7 @@ app.use(express.static(publicPath))
 app.use('/auth', authRouter)
 app.use('/user', userRouter)
 app.use('/game', gameRouter)
+app.use('/character', characterRouter)
 
 // This folder will be Public
 app.use(express.static(path.join(__dirname, 'uploads/games')))
