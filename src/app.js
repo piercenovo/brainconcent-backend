@@ -20,12 +20,16 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors())
 
-app.get('/', (req, res) => res.send('Bienvenido al Backend de Brainconcent'))
+// app.get('/', (req, res) => res.send('Bienvenido a la API de Brainconcent'))
+
+// Public Path
+const publicPath = path.join(__dirname, 'public')
+app.use(express.static(publicPath))
 
 // Routes
-app.use('/api/auth', authRouter)
-app.use('/api/user', userRouter)
-app.use('/api/game', gameRouter)
+app.use('/auth', authRouter)
+app.use('/user', userRouter)
+app.use('/game', gameRouter)
 
 // This folder will be Public
 app.use(express.static(path.join(__dirname, 'uploads/games')))
