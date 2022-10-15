@@ -3,9 +3,9 @@ const Character = require('../models/character.model')
 
 const createCharacter = async (req = require, res = response) => {
   try {
-    const { name, image, colour, ageImage, toyImage, detailImage, story } = req.body
+    const { name, image, colour, ageImage, countryImage, toyImage, detailImage, story } = req.body
     const link = name.replaceAll(' ', '-').toLowerCase()
-    const character = new Character({ name, image, link, colour, ageImage, toyImage, detailImage, story })
+    const character = new Character({ name, image, link, colour, ageImage, countryImage, toyImage, detailImage, story })
 
     await character.save()
 
