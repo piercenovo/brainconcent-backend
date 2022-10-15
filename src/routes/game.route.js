@@ -3,7 +3,7 @@
 */
 
 const { Router } = require('express')
-const { createGame, getGames } = require('../controllers/game.controllers')
+const { createGame, getGames } = require('../controllers/game.controller')
 
 const router = Router()
 
