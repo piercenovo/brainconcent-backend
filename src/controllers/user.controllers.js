@@ -48,6 +48,24 @@ const createUser = async (req = require, res = response) => {
   }
 }
 
+const getUsers = async (req = require, res = response) => {
+  try {
+    const users = await User.find()
+
+    res.json({
+      resp: true,
+      users
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      resp: false,
+      message: 'Hable con el administrador'
+    })
+  }
+}
+
 module.exports = {
-  createUser
+  createUser,
+  getUsers
 }
