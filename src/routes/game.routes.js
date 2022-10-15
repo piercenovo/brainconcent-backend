@@ -1,5 +1,5 @@
 /*
- path: /api/game
+ path: /game
 */
 
 const { Router } = require('express')
