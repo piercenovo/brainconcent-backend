@@ -22,6 +22,10 @@ const UserSchema = Schema({
     type: String,
     required: true
   },
+  countryImage: {
+    type: String,
+    required: true
+  },
   toyImage: {
     type: String,
     required: true
