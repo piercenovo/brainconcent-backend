@@ -1,7 +1,7 @@
-const { response } = require('express')
-const Character = require('../models/character.model')
+import Character from '../models/character.model.js'
+import { response, request } from 'express'
 
-const createCharacter = async (req = require, res = response) => {
+export const createCharacter = async (req = request, res = response) => {
   try {
     const { name, image, colour, ageImage, countryImage, toyImage, detailImage, story } = req.body
     const link = name.replaceAll(' ', '-').toLowerCase()
@@ -22,7 +22,7 @@ const createCharacter = async (req = require, res = response) => {
   }
 }
 
-const getCharacters = async (req = require, res = response) => {
+export const getCharacters = async (req = request, res = response) => {
   try {
     const characters = await Character.find()
 
@@ -37,9 +37,4 @@ const getCharacters = async (req = require, res = response) => {
       message: 'Hable con el administrador'
     })
   }
-}
-
-module.exports = {
-  createCharacter,
-  getCharacters
 }

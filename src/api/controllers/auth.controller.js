@@ -1,9 +1,9 @@
-const bcrypt = require('bcryptjs/dist/bcrypt')
-const User = require('../models/user.model')
-const { request, response } = require('express')
-const { generateJWT } = require('../helpers/jwt')
+import { response, request } from 'express'
+import bcrypt  from 'bcryptjs'
+import { generateJWT } from '../helpers/jwt.js'
+import User from '../models/user.model.js'
 
-const login = async (req = request, res = response) => {
+export const login = async (req = request, res = response) => {
   const { username, password } = req.body
 
   try {
@@ -15,7 +15,6 @@ const login = async (req = request, res = response) => {
       })
     }
 
-    // Validar el password
     const validPassword = bcrypt.compareSync(password, userDB.password)
     if (!validPassword) {
       return res.status(400).json({
@@ -41,7 +40,7 @@ const login = async (req = request, res = response) => {
   }
 }
 
-const renewToken = async (req = request, res = response) => {
+export const renewToken = async (req = request, res = response) => {
   // const uid uid del usuario
   const uid = req.uid
   // generar un nuevo JWT, generarJWT... uid...
@@ -54,9 +53,4 @@ const renewToken = async (req = request, res = response) => {
     user,
     token
   })
-}
-
-module.exports = {
-  login,
-  renewToken
 }

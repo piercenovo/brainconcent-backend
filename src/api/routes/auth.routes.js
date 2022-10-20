@@ -2,10 +2,11 @@
  path: /auth
 */
 
-const { Router } = require('express')
-const { check } = require('express-validator')
-const { login, renewToken } = require('../controllers/auth.controller')
-const { validateJWT } = require('../middlewares/validate-jwt')
+import { Router } from 'express'
+import { check } from 'express-validator'
+import { login, renewToken } from '../controllers/auth.controller.js'
+import { validateJWT } from '../middlewares/validate-jwt.js'
+
 
 const router = Router()
 
@@ -13,7 +14,6 @@ router.post('/login', [
   check('username', 'El nombre de usuario es obligatorio').not().isEmpty(),
   check('password', 'La contraseña es obligatoria').not().isEmpty()
 ], login)
-
 router.get('/renew', validateJWT, renewToken)
 
-module.exports = router
+export default router
