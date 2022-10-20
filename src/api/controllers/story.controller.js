@@ -1,7 +1,7 @@
-const { response } = require('express')
-const Story = require('../models/story.model')
+import Story from '../models/story.model.js'
+import { response, request } from 'express'
 
-const createStory = async (req = require, res = response) => {
+export const createStory = async (req = request, res = response) => {
   try {
     const { name, image, video } = req.body
     const story = new Story({ name, image, video })
@@ -21,7 +21,7 @@ const createStory = async (req = require, res = response) => {
   }
 }
 
-const getStories = async (req = require, res = response) => {
+export const getStories = async (req = request, res = response) => {
   try {
     const stories = await Story.find()
 
@@ -36,9 +36,4 @@ const getStories = async (req = require, res = response) => {
       message: 'Hable con el administrador'
     })
   }
-}
-
-module.exports = {
-  createStory,
-  getStories
 }

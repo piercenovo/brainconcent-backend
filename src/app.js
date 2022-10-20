@@ -1,19 +1,18 @@
-const express = require('express')
-const morgan = require('morgan')
-const path = require('path')
-const cors = require('cors')
+import express from 'express'
+import morgan from 'morgan'
+import cors from 'cors'
+import { dbConnection } from './api/database/db.js'
+import { notFound, handleError } from './api/middlewares/index.js'
 
-const authRouter = require('./routes/auth.route')
-const userRouter = require('./routes/user.route')
-const gameRouter = require('./routes/game.route')
-const characterRouter = require('./routes/character.route')
-const storyRouter = require('./routes/story.route')
+import indexRouter from './api/routes/index.routes.js'
+import authRouter from './api/routes/auth.routes.js'
+import userRouter from './api/routes/user.routes.js'
+import gameRouter from './api/routes/game.routes.js'
+import characterRouter from './api/routes/character.routes.js'
+import storyRouter from './api/routes/story.routes.js'
 
-// Env and DB Config
-require('dotenv').config()
-require('./database/db').dbConnection()
-
-// App de Express
+// Initialization
+dbConnection()
 const app = express()
 
 // Middlewares
@@ -22,20 +21,16 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors())
 
-// app.get('/', (req, res) => res.send('Bienvenido a la API de Brainconcent'))
-
-// Public Path
-const publicPath = path.join(__dirname, 'public')
-app.use(express.static(publicPath))
-
 // Routes
+app.get('/', indexRouter)
 app.use('/auth', authRouter)
 app.use('/user', userRouter)
 app.use('/game', gameRouter)
 app.use('/character', characterRouter)
 app.use('/story', storyRouter)
 
-// This folder will be Public
-app.use(express.static(path.join(__dirname, 'uploads/games')))
+// Handle errors
+app.use(notFound)
+app.use(handleError)
 
-module.exports = app
+export default app

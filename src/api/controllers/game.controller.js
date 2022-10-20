@@ -1,7 +1,7 @@
-const { response } = require('express')
-const Game = require('../models/game.model')
+import Game from '../models/game.model.js'
+import { response, request } from 'express'
 
-const createGame = async (req = require, res = response) => {
+export const createGame = async (req = request, res = response) => {
   try {
     const { name, category, image, description, skillsTitles, skillsImages } = req.body
     const link = name.replaceAll(' ', '-').toLowerCase()
@@ -22,7 +22,7 @@ const createGame = async (req = require, res = response) => {
   }
 }
 
-const getGames = async (req = require, res = response) => {
+export const getGames = async (req = request, res = response) => {
   try {
     const games = await Game.find()
 
@@ -37,9 +37,4 @@ const getGames = async (req = require, res = response) => {
       message: 'Hable con el administrador'
     })
   }
-}
-
-module.exports = {
-  createGame,
-  getGames
 }
