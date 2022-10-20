@@ -2,10 +2,10 @@
  path: /user
 */
 
-const { Router } = require('express')
-const { check } = require('express-validator')
-const { createUser, getUsers, getUser } = require('../controllers/user.controller')
-const { validateFields } = require('../middlewares/validate-fields')
+import { Router } from 'express'
+import { check } from 'express-validator'
+import { createUser, getUsers, getUser } from '../controllers/user.controller.js'
+import { validateFields } from '../middlewares/index.js'
 
 const router = Router()
 
@@ -20,4 +20,4 @@ router.get('/get-users', getUsers)
 
 router.get('/get-user/:id', getUser)
 
-module.exports = router
+export default router

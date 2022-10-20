@@ -1,10 +1,10 @@
 
-const bcrypt = require('bcryptjs/dist/bcrypt')
-const { response } = require('express')
-const { generateJWT } = require('../helpers/jwt')
-const User = require('../models/user.model')
+import { response, request } from 'express'
+import bcrypt from 'bcryptjs'
+import { generateJWT } from '../helpers/jwt.js'
+import User from '../models/user.model.js'
 
-const createUser = async (req = require, res = response) => {
+export const createUser = async (req = request, res = response) => {
   const { username, email, password } = req.body
 
   try {
@@ -49,7 +49,7 @@ const createUser = async (req = require, res = response) => {
   }
 }
 
-const getUsers = async (req = require, res = response) => {
+export const getUsers = async (req = request, res = response) => {
   try {
     const users = await User.find()
 
@@ -66,7 +66,7 @@ const getUsers = async (req = require, res = response) => {
   }
 }
 
-const getUser = async (req = require, res = response) => {
+export const getUser = async (req = require, res = response) => {
   const { id } = req.params
 
   try {
@@ -83,10 +83,4 @@ const getUser = async (req = require, res = response) => {
       message: 'Hable con el administrador'
     })
   }
-}
-
-module.exports = {
-  createUser,
-  getUsers,
-  getUser
 }
