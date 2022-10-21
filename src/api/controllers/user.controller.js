@@ -1,4 +1,3 @@
-
 import { response, request } from 'express'
 import bcrypt from 'bcryptjs'
 import { generateJWT } from '../helpers/jwt.js'
@@ -84,3 +83,23 @@ export const getUser = async (req = require, res = response) => {
     })
   }
 }
+
+export const getUserByToken = async (req, res = response) => {
+  const uid = req.uid
+
+  try {
+    const user = await User.findById(uid)
+
+    res.json({
+      resp: true,
+      user
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      resp: false,
+      message: 'Hable con el administrador'
+    })
+  }
+}
+

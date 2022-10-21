@@ -4,8 +4,8 @@
 
 import { Router } from 'express'
 import { check } from 'express-validator'
-import { createUser, getUsers, getUser } from '../controllers/user.controller.js'
-import { validateFields } from '../middlewares/index.js'
+import { createUser, getUsers, getUser, getUserByToken } from '../controllers/user.controller.js'
+import { validateFields, validateJWT } from '../middlewares/index.js'
 
 const router = Router()
 
@@ -18,6 +18,8 @@ router.post('/create-user', [
 
 router.get('/get-users', getUsers)
 
-router.get('/get-user/:id', getUser)
+router.get('/get-user/:id', validateJWT, getUser)
+
+router.get('/get-user-token', validateJWT, getUserByToken)
 
 export default router
