@@ -22,7 +22,7 @@ const UserSchema = mongoose.Schema({
   },
   avatar: {
     type: String,
-    default: 'avatar-1.png'
+    default: 'assets/img/avatar/juan-avatar.png'
   }
 },
 { versionKey: false }
