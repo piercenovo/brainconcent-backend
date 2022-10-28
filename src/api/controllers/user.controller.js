@@ -7,7 +7,7 @@ export const createUser = async (req = request, res = response) => {
   const { username, email, password } = req.body
 
   try {
-    const usernameExists = await User.findOne({ username })
+    const usernameExists = await User.findOne({ username: username })
     if (usernameExists) {
       return res.status(400).json({
         resp: false,
@@ -15,7 +15,7 @@ export const createUser = async (req = request, res = response) => {
       })
     }
 
-    const mailExists = await User.findOne({ email })
+    const mailExists = await User.findOne({ email: email })
     if (mailExists) {
       return res.status(400).json({
         resp: false,
@@ -34,33 +34,32 @@ export const createUser = async (req = request, res = response) => {
     // Generar mi JWT
     const token = await generateJWT(user.id)
 
-    res.json({
+    return res.json({
       resp: true,
-      user,
+      message: 'Usuario creado exitosamente',
       token
     })
   } catch (error) {
-    console.log(error)
-    res.status(500).json({
+    return res.status(500).json({
       resp: false,
-      message: 'Hable con el administrador'
+      message: error.message
     })
   }
 }
 
-export const getUsers = async (req = request, res = response) => {
+export const getAllUsers = async (req = request, res = response) => {
   try {
     const users = await User.find()
 
-    res.json({
+    return res.json({
       resp: true,
-      users
+      message: 'Lista de Usuarios',
+      users: users
     })
   } catch (error) {
-    console.log(error)
-    res.status(500).json({
+    return res.status(500).json({
       resp: false,
-      message: 'Hable con el administrador'
+      message: error.message
     })
   }
 }
@@ -71,15 +70,15 @@ export const getUser = async (req = require, res = response) => {
   try {
     const user = await User.findById(id)
 
-    res.json({
+    return res.json({
       resp: true,
-      user
+      message: 'Usuario por ID',
+      user: user
     })
   } catch (error) {
-    console.log(error)
-    res.status(500).json({
+    return res.status(500).json({
       resp: false,
-      message: 'Hable con el administrador'
+      message: error.message
     })
   }
 }
@@ -90,16 +89,15 @@ export const getUserByToken = async (req, res = response) => {
   try {
     const user = await User.findById(uid)
 
-    res.json({
+    return res.json({
       resp: true,
-      user
+      message: 'Usuario por Token',
+      user: user
     })
   } catch (error) {
-    console.log(error)
-    res.status(500).json({
+    return res.status(500).json({
       resp: false,
-      message: 'Hable con el administrador'
+      message: error.message
     })
   }
 }
-

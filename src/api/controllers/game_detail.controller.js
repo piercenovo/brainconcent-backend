@@ -4,61 +4,86 @@ import Game from '../models/game.model.js'
 import GameDetail from '../models/game_detail.model.js'
 
 export const getGameDetails = async (req = request, res = response) => {
+  const { userId, gameId, time, tap } = req.body
+
+  const gameScore = time * tap / 100
+
+  const gameDetail = new GameDetail({
+    time: time,
+    tap: tap,
+    gd_user: userId,
+    gd_game: gameId,
+    score: gameScore
+  })
+
   try {
-    const { user_id, game_id, time, tap } = req.body
-    const game_score = time * tap / 100
-    const userExits = await User.findById( user_id )
-    const gameExits = await Game.findById( game_id )
+    const userExits = await User.findById(userId)
 
-    const gameDetail = new GameDetail({
-      time: time, 
-      tap: tap,
-      gd_user: user_id,
-      gd_game: game_id,
-      score: game_score
-    })
+    if (!userExits) {
+      return res.status(400).json({
+        resp: false,
+        message: 'Usuario incorrecto o no existente'
+      })
+    }
 
+    const gameExits = await Game.findById(gameId)
+    if (!gameExits) {
+      return res.status(400).json({
+        resp: false,
+        message: 'Juego incorrecto o no existente'
+      })
+    }
     await gameDetail.save()
 
-    res.json({
+    return res.json({
       resp: true,
-      gameDetail
+      gameDetail: gameDetail
     })
   } catch (error) {
-    console.log(error)
-    res.status(500).json({
+    return res.status(500).json({
       resp: false,
-      message: 'Hable con el administrador'
+      message: error.message
     })
   }
 }
 
 export const getScoreCalculation = async (req = request, res = response) => {
+  const { userId, gameId, time, tap } = req.body
+
+  const gameDetail = new GameDetail({
+    time: time,
+    tap: tap,
+    gd_user: userId,
+    gd_game: gameId
+  })
+
   try {
-    const { user_id, game_id, time, tap } = req.body
-    
-    const userExits = await User.findById( user_id )
-    const gameExits = await Game.findById( game_id )
+    const userExits = await User.findById(userId)
 
-    const gameDetail = new GameDetail({
-      time: time, 
-      tap: tap,
-      gd_user: user_id,
-      gd_game: game_id,
-    })
+    if (!userExits) {
+      return res.status(400).json({
+        resp: false,
+        message: 'Usuario incorrecto o no existente'
+      })
+    }
 
+    const gameExits = await Game.findById(gameId)
+    if (!gameExits) {
+      return res.status(400).json({
+        resp: false,
+        message: 'Juego incorrecto o no existente'
+      })
+    }
     await gameDetail.save()
 
-    res.json({
+    return res.json({
       resp: true,
-      gameDetail
+      gameDetail: gameDetail
     })
   } catch (error) {
-    console.log(error)
-    res.status(500).json({
+    return res.status(500).json({
       resp: false,
-      message: 'Hable con el administrador'
+      message: error.message
     })
   }
 }
-

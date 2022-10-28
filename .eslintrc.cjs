@@ -1,17 +1,16 @@
 module.exports = {
   env: {
     browser: true,
-    commonjs: true,
-    es2021: true,
-    node: true
+    es2021: true
   },
   extends: [
     'standard'
   ],
   parserOptions: {
-    ecmaVersion: 2020
+    ecmaVersion: 'latest',
+    sourceType: 'module'
   },
   rules: {
-    'prefer-promise-reject-errors': 'off'
+    'object-shorthand': 'off'
   }
 }

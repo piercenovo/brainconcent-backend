@@ -1,17 +1,17 @@
-import { response, request } from 'express'
-import bcrypt  from 'bcryptjs'
+import { response } from 'express'
+import bcrypt from 'bcryptjs'
 import { generateJWT } from '../helpers/jwt.js'
 import User from '../models/user.model.js'
 
-export const login = async (req = request, res = response) => {
+export const login = async (req, res = response) => {
   const { username, password } = req.body
 
   try {
-    const userDB = await User.findOne({ username })
+    const userDB = await User.findOne({ username: username })
     if (!userDB) {
-      return res.status(404).json({
+      return res.status(400).json({
         resp: false,
-        message: 'Nombre de usuario no encontrado'
+        message: 'Por favor, verifique su nombre de usuario'
       })
     }
 
@@ -19,38 +19,40 @@ export const login = async (req = request, res = response) => {
     if (!validPassword) {
       return res.status(400).json({
         resp: false,
-        message: 'La contraseña no es válida'
+        message: 'Credenciales incorrectas'
       })
     }
 
     // Generar el JWT
     const token = await generateJWT(userDB.id)
 
-    res.json({
+    return res.json({
       resp: true,
-      user: userDB,
-      token
+      message: 'Bienvenido a Brainconcent',
+      token: token
     })
   } catch (error) {
-    console.log(error)
     return res.status(500).json({
       resp: false,
-      message: 'Hable con el administrador'
+      message: error.message
     })
   }
 }
 
-export const renewToken = async (req = request, res = response) => {
-  // const uid uid del usuario
-  const uid = req.uid
-  // generar un nuevo JWT, generarJWT... uid...
-  const token = await generateJWT(uid)
-  // obtener el usuario por el UID, Usuario.findById...
-  const user = await User.findById(uid)
+export const renewLogin = async (req, res = response) => {
+  try {
+    const uid = req.uid
+    const token = await generateJWT(uid)
 
-  res.json({
-    resp: true,
-    user,
-    token
-  })
+    return res.json({
+      resp: true,
+      message: 'Bienvenido a Brainconcent',
+      token: token
+    })
+  } catch (error) {
+    return res.status(500).json({
+      resp: false,
+      message: error.message
+    })
+  }
 }
