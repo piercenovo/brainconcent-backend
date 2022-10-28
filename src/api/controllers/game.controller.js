@@ -1,40 +1,39 @@
 import Game from '../models/game.model.js'
-import { response, request } from 'express'
+import { response } from 'express'
 
-export const createGame = async (req = request, res = response) => {
+export const createGame = async (req, res = response) => {
   try {
     const { name, category, image, description, skillsTitles, skillsImages } = req.body
     const link = name.replaceAll(' ', '-').toLowerCase()
-    const game = new Game({ name, category, image, link, description, skillsTitles, skillsImages })
+    const game = new Game({ name: name, category: category, image: image, link: link, description: description, skillsTitles: skillsTitles, skillsImages: skillsImages })
 
     await game.save()
 
-    res.json({
+    return res.json({
       resp: true,
-      game
+      message: 'Juego creado exitosamente'
     })
   } catch (error) {
-    console.log(error)
-    res.status(500).json({
+    return res.status(500).json({
       resp: false,
-      message: 'Hable con el administrador'
+      message: error
     })
   }
 }
 
-export const getGames = async (req = request, res = response) => {
+export const getAllGames = async (req, res = response) => {
   try {
     const games = await Game.find()
 
-    res.json({
+    return res.json({
       resp: true,
-      games
+      message: 'Lista de Juegos',
+      games: games
     })
   } catch (error) {
-    console.log(error)
-    res.status(500).json({
+    return res.status(500).json({
       resp: false,
-      message: 'Hable con el administrador'
+      message: error
     })
   }
 }

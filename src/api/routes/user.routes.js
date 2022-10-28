@@ -4,7 +4,7 @@
 
 import { Router } from 'express'
 import { check } from 'express-validator'
-import { createUser, getUsers, getUser, getUserByToken } from '../controllers/user.controller.js'
+import { createUser, getAllUsers, getUser, getUserByToken } from '../controllers/user.controller.js'
 import { validateFields, validateJWT } from '../middlewares/index.js'
 
 const router = Router()
@@ -16,7 +16,7 @@ router.post('/create-user', [
   validateFields
 ], createUser)
 
-router.get('/get-users', getUsers)
+router.get('/get-users', getAllUsers)
 
 router.get('/get-user/:id', validateJWT, getUser)
 
