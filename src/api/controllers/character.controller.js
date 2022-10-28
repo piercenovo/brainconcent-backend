@@ -17,7 +17,7 @@ export const createCharacter = async (req, res = response) => {
   } catch (error) {
     return res.status(500).json({
       resp: false,
-      message: error
+      message: error.message
     })
   }
 }
@@ -34,7 +34,7 @@ export const getAllCharacters = async (req, res = response) => {
   } catch (error) {
     return res.status(500).json({
       resp: false,
-      message: error
+      message: error.message
     })
   }
 }

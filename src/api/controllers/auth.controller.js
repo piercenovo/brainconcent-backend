@@ -34,7 +34,7 @@ export const login = async (req, res = response) => {
   } catch (error) {
     return res.status(500).json({
       resp: false,
-      message: error
+      message: error.message
     })
   }
 }
@@ -52,7 +52,7 @@ export const renewLogin = async (req, res = response) => {
   } catch (error) {
     return res.status(500).json({
       resp: false,
-      message: error
+      message: error.message
     })
   }
 }

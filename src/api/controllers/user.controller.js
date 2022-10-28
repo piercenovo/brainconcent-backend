@@ -42,7 +42,7 @@ export const createUser = async (req = request, res = response) => {
   } catch (error) {
     return res.status(500).json({
       resp: false,
-      message: error
+      message: error.message
     })
   }
 }
@@ -59,7 +59,7 @@ export const getAllUsers = async (req = request, res = response) => {
   } catch (error) {
     return res.status(500).json({
       resp: false,
-      message: error
+      message: error.message
     })
   }
 }
@@ -78,7 +78,7 @@ export const getUser = async (req = require, res = response) => {
   } catch (error) {
     return res.status(500).json({
       resp: false,
-      message: error
+      message: error.message
     })
   }
 }
@@ -97,7 +97,7 @@ export const getUserByToken = async (req, res = response) => {
   } catch (error) {
     return res.status(500).json({
       resp: false,
-      message: error
+      message: error.message
     })
   }
 }

@@ -16,7 +16,7 @@ export const createGame = async (req, res = response) => {
   } catch (error) {
     return res.status(500).json({
       resp: false,
-      message: error
+      message: error.message
     })
   }
 }
@@ -33,7 +33,7 @@ export const getAllGames = async (req, res = response) => {
   } catch (error) {
     return res.status(500).json({
       resp: false,
-      message: error
+      message: error.message
     })
   }
 }

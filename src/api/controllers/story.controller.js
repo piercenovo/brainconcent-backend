@@ -32,7 +32,7 @@ export const getAllStories = async (req, res = response) => {
   } catch (error) {
     return res.status(500).json({
       resp: false,
-      message: error
+      message: error.message
     })
   }
 }
