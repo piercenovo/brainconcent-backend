@@ -11,6 +11,8 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
-    'object-shorthand': 'off'
+    'object-shorthand': 'off',
+    'prefer-promise-reject-errors': 'off',
+    'no-const-assign': 'off'
   }
 }

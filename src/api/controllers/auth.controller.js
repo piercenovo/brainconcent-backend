@@ -11,7 +11,7 @@ export const login = async (req, res = response) => {
     if (!userDB) {
       return res.status(400).json({
         resp: false,
-        message: 'Por favor, verifique su nombre de usuario'
+        message: 'Credenciales incorrectas'
       })
     }
 

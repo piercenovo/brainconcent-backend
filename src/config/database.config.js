@@ -1,4 +1,4 @@
-import { MONGO_URI } from '../../config/general.config.js'
+import { MONGO_URI } from './general.config.js'
 import mongoose from 'mongoose'
 
 export const dbConnection = async () => {
