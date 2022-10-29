@@ -1,5 +1,5 @@
 import { JWT_KEY } from '../../config/general.config.js'
-import jwt  from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 
 export const validateJWT = (req, res, next) => {
   const token = req.header('x-token')
@@ -7,7 +7,7 @@ export const validateJWT = (req, res, next) => {
   if (!token) {
     return res.status(401).json({
       resp: false,
-      message: 'There is not Token in the request'
+      message: 'No hay Token en la solicitud'
     })
   }
 
@@ -19,7 +19,7 @@ export const validateJWT = (req, res, next) => {
   } catch (error) {
     return res.status(401).json({
       resp: false,
-      message: 'Invalid Token'
+      message: 'Token no válido'
     })
   }
 }

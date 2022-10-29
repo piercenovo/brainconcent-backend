@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const UserSchema = mongoose.Schema({
+const CharacterSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -42,10 +42,10 @@ const UserSchema = mongoose.Schema({
 { versionKey: false }
 )
 
-UserSchema.method('toJSON', function () {
+CharacterSchema.method('toJSON', function () {
   const { _id, ...object } = this.toObject()
   object.uid = _id
   return object
 })
 
-export default mongoose.model('Character', UserSchema)
+export default mongoose.model('Character', CharacterSchema)

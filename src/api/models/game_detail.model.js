@@ -7,7 +7,7 @@ const GameDetailSchema = mongoose.Schema({
   },
   tap: {
     type: Number,
-    required: true,
+    required: true
   },
   date: {
     type: Date,
@@ -15,7 +15,7 @@ const GameDetailSchema = mongoose.Schema({
   },
   score: {
     type: Number,
-    required: true,
+    required: true
   },
   gd_user: {
     type: mongoose.Schema.Types.ObjectId,

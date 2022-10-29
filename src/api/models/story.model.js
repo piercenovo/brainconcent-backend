@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const UserSchema = mongoose.Schema({
+const StorySchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -18,10 +18,10 @@ const UserSchema = mongoose.Schema({
 { versionKey: false }
 )
 
-UserSchema.method('toJSON', function () {
+StorySchema.method('toJSON', function () {
   const { _id, ...object } = this.toObject()
   object.uid = _id
   return object
 })
 
-export default mongoose.model('Story', UserSchema)
+export default mongoose.model('Story', StorySchema)

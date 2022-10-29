@@ -3,10 +3,10 @@
 */
 
 import { Router } from 'express'
-import { getGameDetails } from '../controllers/game_detail.controller.js'
+import { getGameDetail } from '../controllers/game_detail.controller.js'
 
 const router = Router()
 
-router.post('/get-game-details', getGameDetails)
+router.post('/get-game-detail', getGameDetail)
 
 export default router

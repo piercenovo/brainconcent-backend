@@ -1,7 +1,7 @@
 import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
-import { dbConnection } from './api/database/db.js'
+import { dbConnection } from './config/database.config.js'
 import { notFound, handleError } from './api/middlewares/index.js'
 
 import indexRouter from './api/routes/index.routes.js'

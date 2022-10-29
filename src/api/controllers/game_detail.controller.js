@@ -3,7 +3,7 @@ import User from '../models/user.model.js'
 import Game from '../models/game.model.js'
 import GameDetail from '../models/game_detail.model.js'
 
-export const getGameDetails = async (req = request, res = response) => {
+export const getGameDetail = async (req = request, res = response) => {
   const { userId, gameId, time, tap } = req.body
 
   const gameScore = time * tap / 100

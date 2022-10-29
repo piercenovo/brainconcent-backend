@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose from 'mongoose'
 
 const UserSchema = mongoose.Schema({
 
@@ -18,6 +18,10 @@ const UserSchema = mongoose.Schema({
   },
   password: {
     type: String,
+    required: true
+  },
+  temp: {
+    type: Number,
     required: true
   },
   avatar: {
