@@ -105,15 +105,22 @@ export const getUser = async (req = require, res = response) => {
 
 export const verifyEmail = async (req, res = response) => {
   const { code, email } = req.params
+
   try {
     const user = await User.find({ code, email })
     const temp = user[0].temp
+
+    const updateEmailVerified = {
+      email_verified: true
+    }
+
     if (req.params.code !== temp) {
       return res.status(401).json({
         resp: false,
         message: 'Verificación sin exito...'
       })
     } else {
+      await User.findOneAndUpdate({ email }, updateEmailVerified, { new: true, runValidators: true })
       return res.json({
         resp: true,
         message: 'Bienvenido, validado exitosamente'
