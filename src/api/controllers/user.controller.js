@@ -1,6 +1,5 @@
 import { response, request } from 'express'
 import bcrypt from 'bcryptjs'
-import { generateJWT } from '../helpers/jwt.js'
 import User from '../models/user.model.js'
 import { sendEmailVerify } from '../middlewares/nodemail.js'
 import { emailTemplate, randomNumber } from '../helpers/email.template.js'
@@ -37,13 +36,9 @@ export const createUser = async (req = request, res = response) => {
 
     await user.save()
 
-    // Generar mi JWT
-    const token = await generateJWT(user.id)
-
     return res.json({
       resp: true,
-      message: 'Usuario creado exitosamente',
-      token: token
+      message: 'Usuario creado exitosamente'
     })
   } catch (error) {
     return res.status(500).json({
@@ -81,6 +76,49 @@ export const getUserById = async (req, res = response) => {
       message: 'Usuario por ID',
       user: user
     })
+  } catch (error) {
+    return res.status(500).json({
+      resp: false,
+      message: error.message
+    })
+  }
+}
+
+export const getUser = async (req = require, res = response) => {
+  const { id } = req.params
+
+  try {
+    const user = await User.findById(id)
+
+    return res.json({
+      resp: true,
+      message: 'Usuario por ID',
+      user: user
+    })
+  } catch (error) {
+    return res.status(500).json({
+      resp: false,
+      message: error.message
+    })
+  }
+}
+
+export const verifyEmail = async (req, res = response) => {
+  const { code, email } = req.params
+  try {
+    const user = await User.find({ code, email })
+    const temp = user[0].temp
+    if (req.params.code !== temp) {
+      return res.status(401).json({
+        resp: false,
+        message: 'Verificación sin exito...'
+      })
+    } else {
+      return res.json({
+        resp: true,
+        message: 'Bienvenido, validado exitosamente'
+      })
+    }
   } catch (error) {
     return res.status(500).json({
       resp: false,
