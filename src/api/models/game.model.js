@@ -22,11 +22,11 @@ const GameSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  skillsTitles: {
+  skillTitles: {
     type: Array,
     required: true
   },
-  skillsImages: {
+  skillImages: {
     type: Array,
     required: true
   }
