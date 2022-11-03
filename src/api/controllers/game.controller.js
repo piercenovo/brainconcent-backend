@@ -3,9 +3,9 @@ import { response } from 'express'
 
 export const createGame = async (req, res = response) => {
   try {
-    const { name, category, image, description, skillsTitles, skillsImages } = req.body
+    const { name, category, image, description, skillTitles, skillImages } = req.body
     const link = name.replaceAll(' ', '-').toLowerCase()
-    const game = new Game({ name: name, category: category, image: image, link: link, description: description, skillsTitles: skillsTitles, skillsImages: skillsImages })
+    const game = new Game({ name: name, category: category, image: image, link: link, description: description, skillTitles: skillTitles, skillImages: skillImages })
 
     await game.save()
 

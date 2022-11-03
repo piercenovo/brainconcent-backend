@@ -6,12 +6,28 @@ const StorySchema = mongoose.Schema({
     required: true,
     unique: true
   },
+  description: {
+    type: String,
+    required: true
+  },
   image: {
     type: String,
     required: true
   },
-  video: {
+  duration: {
     type: String,
+    required: true
+  },
+  chapterTitles: {
+    type: Array,
+    required: true
+  },
+  chapterDuration: {
+    type: Array,
+    required: true
+  },
+  chapterVideos: {
+    type: Array,
     required: true
   }
 },

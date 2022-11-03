@@ -84,25 +84,6 @@ export const getUserById = async (req, res = response) => {
   }
 }
 
-export const getUser = async (req = require, res = response) => {
-  const { id } = req.params
-
-  try {
-    const user = await User.findById(id)
-
-    return res.json({
-      resp: true,
-      message: 'Usuario por ID',
-      user: user
-    })
-  } catch (error) {
-    return res.status(500).json({
-      resp: false,
-      message: error.message
-    })
-  }
-}
-
 export const verifyEmail = async (req, res = response) => {
   const { code, email } = req.params
 

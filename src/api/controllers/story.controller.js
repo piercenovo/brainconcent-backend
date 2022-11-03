@@ -3,8 +3,8 @@ import { response } from 'express'
 
 export const createStory = async (req, res = response) => {
   try {
-    const { name, image, video } = req.body
-    const story = new Story({ name: name, image: image, video: video })
+    const { name, description, image, duration, chapterTitles, chapterDuration, chapterVideos } = req.body
+    const story = new Story({ name: name, description: description, image: image, duration: duration, chapterTitles: chapterTitles, chapterDuration: chapterDuration, chapterVideos: chapterVideos })
 
     await story.save()
 
