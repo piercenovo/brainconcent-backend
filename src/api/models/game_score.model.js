@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const GameDetailSchema = mongoose.Schema({
+const GameScoreSchema = mongoose.Schema({
   time: {
     type: Number,
     required: true
@@ -13,15 +13,11 @@ const GameDetailSchema = mongoose.Schema({
     type: Date,
     default: Date.now()
   },
-  score: {
-    type: Number,
-    required: true
-  },
-  gd_user: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  gd_game: {
+  gameId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Game'
   }
@@ -29,10 +25,10 @@ const GameDetailSchema = mongoose.Schema({
 { versionKey: false }
 )
 
-GameDetailSchema.method('toJSON', function () {
+GameScoreSchema.method('toJSON', function () {
   const { _id, ...object } = this.toObject()
   object.uid = _id
   return object
 })
 
-export default mongoose.model('GameDetail', GameDetailSchema)
+export default mongoose.model('GameScore', GameScoreSchema)
