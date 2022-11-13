@@ -24,8 +24,6 @@ export const createUser = async (req = request, res = response) => {
       })
     }
 
-    // const randomNumber = Math.floor(10000 + Math.random() * 90000)
-
     const user = new User({ name: name, username: username, email: email, password: password, temp: randomNumber })
 
     // Encriptar contraseña
