@@ -1,6 +1,6 @@
 {
   "name": "brainconcent-backend",
-  "version": "0.0.3",
+  "version": "0.8.0",
   "description": "A REST API for the Brainconcent app",
   "main": "src/index.js",
   "type": "module",
