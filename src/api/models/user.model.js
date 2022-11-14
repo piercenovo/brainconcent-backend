@@ -26,7 +26,7 @@ const UserSchema = mongoose.Schema({
   },
   avatar: {
     type: String,
-    default: 'assets/img/avatar/juan-avatar.png'
+    default: 'assets/images/avatar/juan-avatar.png'
   },
   email_verified: {
     type: Boolean,
