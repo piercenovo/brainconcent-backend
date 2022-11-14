@@ -6,7 +6,7 @@ export const generateJWT = (uid) => {
     const payload = { uid }
 
     jwt.sign(payload, JWT_KEY, {
-      expiresIn: '24h'
+      expiresIn: '30d'
     }, (err, token) => {
       if (err) {
         reject('Error al generar el JWT')
