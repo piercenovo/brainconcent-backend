@@ -7,7 +7,7 @@ export const dbConnection = async () => {
       useNewUrlParser: 'true',
       useUnifiedTopology: 'true'
     })
-    console.log('MongoDB connectado...')
+    console.log('MongoDB conectado satisfactoriamente')
   } catch (err) {
     console.log(err)
   }
